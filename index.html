@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Valentine 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
+
+body{
+  min-height:100vh;
+  background:radial-gradient(circle at top,#ffb6d5,#ff5f9e,#ff025b);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+}
+
+.floats{
+  position:fixed;inset:0;pointer-events:none;z-index:1;
+}
+.float{
+  position:absolute;font-size:22px;
+  animation:float 5s linear infinite;
+}
+@keyframes float{
+  0%{transform:translateY(100vh) scale(0);opacity:0}
+  20%{opacity:1}
+  100%{transform:translateY(-10vh) scale(1.4);opacity:0}
+}
+
+.container{
+  width:90%;
+  max-width:430px;
+  background:rgba(255,255,255,.25);
+  backdrop-filter:blur(18px);
+  border-radius:30px;
+  padding:36px 26px;
+  text-align:center;
+  box-shadow:0 35px 100px rgb(255, 0, 221);
+  display:none;
+  animation:enter .6s ease;
+  z-index:2;
+  position:relative;
+}
+@keyframes enter{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.container.active{display:block}
+
+h1,h2{color:#ff145d}
+p{color:#333;margin:16px 0 24px}
+
+input{
+  width:100%;
+  padding:14px;
+  margin:5px 0;
+  border-radius:25px;
+  border:none;
+  outline:none;
+  text-align:center
+}
+
+button{
+  border:none;
+  padding:14px 32px;
+  border-radius:40px;
+  font-size:16px;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.primary{
+  background:#ff0051;
+  color:#fff;
+  font-weight:600;
+  box-shadow:0 14px 30px rgba(255,20,93,.45)
+}
+.primary:hover{transform:scale(1.12)}
+
+.no{
+  background:#fff;
+  color:#ff145d;
+  position:absolute;
+  box-shadow:0 10px 20px rgba(0,0,0,.15)
+}
+.no:hover{animation:shake .4s}
+
+.buttons{position:relative;height:90px}
+
+.lang{
+  position:absolute;
+  top:12px;
+  right:16px;
+  background:#ffb3d2;
+  border-radius:20px;
+  font-size:12px;
+  padding:6px 12px;
+  cursor:pointer;
+  z-index:5;
+}
+
+.final-options{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px
+}
+.final-options button{
+  background:#fff;
+  color:#ff145d;
+  font-weight:600
+}
+
+@keyframes shake{
+  25%{transform:translateX(-5px)}
+  50%{transform:translateX(5px)}
+  75%{transform:translateX(-5px)}
+}
+.angry-layer{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:1;
+}
+
+.no.shrink{
+  transform:scale(0.6);
+  background:#444;
+  color:#ccc;
+}
+
+.no.cracked{
+  opacity:0.4;
+  filter:grayscale(1) blur(0.5px);
+  box-shadow:inset 0 0 12px rgba(0,0,0,.35);
+  background:repeating-linear-gradient(
+    45deg,
+    #eee,
+    #eee 6px,
+    #ddd 6px,
+    #ddd 12px
+  );
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="floats"></div>
+<div class="angry-layer"></div>
+
+<audio id="romantic1" loop playsinline><source src="romantic1.mp3"></audio>
+<audio id="romantic2" loop playsinline><source src="romantic2.mp3"></audio>
+<audio id="sad1" playsinline><source src="sad1.mp3"></audio>
+<audio id="sad2" playsinline><source src="sad2.mp3"></audio>
+
+<!-- PAGE 1 -->
+<div class="container active" id="p1">
+  <div class="lang" onclick="toggleLang()">EN</div>
+  <h1 id="t1">Ek Filmy Shuruaat 🎬 💋</h1>
+  <p id="d1">Apna pyaara sa Naam likho…</p>
+  <input id="nameInput" placeholder="Your Lovely Name ❤️">
+  <div class="buttons">
+    <button class="primary" onclick="next(1)" id="b1">Jaldi likho Babu 💘</button>
+    <button class="no" id="no1">Nahi 🙈</button>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="container" id="p2">
+  <h2 id="title2"></h2>
+  <p>Kya tum meri zindagi ki har subah aur shaam banogi? 🌹</p>
+  <div class="buttons">
+    <button class="primary" onclick="next(2)">YES 💞</button>
+    <button class="no" id="no2">Ha bol do 👉👈</button>
+  </div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="container" id="p3">
+  <h2>Mohabbat ka Waada 💕</h2>
+  <p>Kya tum mere saath har mod par chalogi? ❤️</p>
+  <div class="buttons">
+    <button class="primary" onclick="next(3)">Always 💖</button>
+    <button class="no" id="no3">Mujhe ghumna nhi 😶</button>
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="container" id="p4">
+  <h2>Filmy Masti 🎥</h2>
+  <p>Agar main thoda filmy ho jaun?</p>
+  <div class="buttons">
+    <button class="primary" onclick="next(4)">Of Course 😍</button>
+    <button class="no" id="no4">Phone slipped 😶</button>
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="container" id="p5">
+  <h2>Serious Sawaal 🥹</h2>
+  <p>Kya tum mere saath hassoge bhi aur rooge bhi?</p>
+  <div class="buttons">
+    <button class="primary" onclick="next(5)">Promise 💍</button>
+    <button class="no" id="no5">Network issue 😵</button>
+  </div>
+</div>
+
+<!-- PAGE 6 -->
+<div class="container" id="p6">
+  <h1>Last Question 😏</h1>
+  <div class="final-options">
+    <button>Chocolate 🍫</button>
+    <button>Sorry 1000 baar 🙏</button>
+    <button>Drama 🎭</button>
+    <button>Hug 🤗</button>
+  </div>
+</div>
+
+<!-- PAGE 7 -->
+<div class="container" id="p7">
+  <h1>Ek Pyaari Si Chitthi 💌</h1>
+  <p id="typeText"></p>
+</div>
+
+<script>
+const pages=[p1,p2,p3,p4,p5,p6,p7];
+const floats=document.querySelector(".floats");
+
+const romantic=[romantic1,romantic2];
+const sad=[sad1,sad2];
+let r=0,s=0,current=null,last="yes";
+
+function stopAll(){[...romantic,...sad].forEach(a=>a.pause());}
+
+function playYes(){
+  if(last==="yes" && current) return;
+  stopAll();
+  current=romantic[r];
+  current.play();
+  last="yes";
+}
+
+function playNo(){
+  stopAll();
+  current=sad[s];
+  current.play();
+  s=(s+1)%sad.length;
+  r=(r+1)%romantic.length;
+  last="no";
+}
+
+const texts=["Soch lo 🥺","Dil se pooch lo ❤️","Dobara socho 😌","Are you sure? 🤨"];
+
+function next(i){
+  if(i===1){
+    if(!nameInput.value.trim()) return;
+    title2.innerText=`${nameInput.value}, ek sawaal hai 💕`;
+  }
+  playYes();
+  pages[i-1].classList.remove("active");
+  pages[i].classList.add("active");
+}
+
+no1.onmouseenter=()=>{
+  const p=p1;
+  no1.style.left=Math.random()*(p.clientWidth-100)+"px";
+  no1.style.top=Math.random()*(p.clientHeight-60)+"px";
+  playNo();
+};
+
+[no2,no3,no4,no5].forEach(b=>{
+  b.onclick=()=>{
+    b.innerText = texts[Math.floor(Math.random()*texts.length)];
+    playNo();
+    showAngryEmojis();
+
+    if(b.id === "no3"){
+      b.classList.add("cracked"); // page 3
+    }
+    if(b.id === "no4"){
+      b.classList.add("shrink"); // page 4 (if you added earlier CSS)
+    }
+  };
+});
+
+
+
+document.querySelectorAll(".final-options button").forEach(b=>{
+  b.onclick=()=>{
+    p6.classList.remove("active");
+    p7.classList.add("active");
+    typeWriter();
+  };
+});
+
+setInterval(()=>{
+  const f=document.createElement("div");
+  f.className="float";
+  f.innerText=["💖","💕","🌹","❤️","🥰"][Math.floor(Math.random()*5)];
+  f.style.left=Math.random()*100+"vw";
+  floats.appendChild(f);
+  setTimeout(()=>f.remove(),5000);
+},250);
+
+const letter=`🐻💖🐻
+Tum meri zindagi ka woh scene ho,
+jiske bina poori film adhuri lagti hai 🎬 🥹.
+
+Har muskaan, har khushi,
+bas tumse shuru hoti hai 🌹✨.
+
+Dudu aur Bubu jaise,
+simple, silly, par hamesha saath 🧸💕.
+
+I love you — aaj bhi, kal bhi, hamesha 💖.`;
+
+let i=0;
+function typeWriter(){
+  if(i<letter.length){
+    typeText.innerHTML+=letter.charAt(i++);
+    setTimeout(typeWriter,40);
+  }
+}
+
+function showAngryEmojis(){
+  const layer = document.querySelector(".angry-layer");
+  for(let i=0;i<30;i++){
+    const e=document.createElement("div");
+    e.innerText=["😡","😠","🤬","😤","🔥"][Math.floor(Math.random()*5)];
+    e.style.position="absolute";
+    e.style.left=Math.random()*100+"vw";
+    e.style.top=Math.random()*100+"vh";
+    e.style.fontSize=Math.random()*20+24+"px";
+    layer.appendChild(e);
+    setTimeout(()=>e.remove(),1500);
+  }
+}
+
+</script>
+</body>
+</html>
